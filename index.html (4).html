@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://www.gstatic.com https://fonts.googleapis.com https://fonts.gstatic.com https://*.googleapis.com https://*.firebaseio.com https://placehold.co https://i.imgur.com https://images.unsplash.com data: blob:; script-src 'self' 'unsafe-inline' https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' https: data:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.google.com wss://*.firebaseio.com; frame-src https://*.firebaseapp.com https://accounts.google.com;">
+<meta name="referrer" content="strict-origin-when-cross-origin"/>
+<title>حمادي استور</title>
+<!--
+  ================================================================
+  حمادي استور - Hamadi Store
+  ================================================================
+  © 2025 حمادي استور. جميع الحقوق محفوظة.
+  © 2025 Hamadi Store. All Rights Reserved.
+
+  هذا الموقع وجميع محتوياته، بما في ذلك التصميم والكود البرمجي
+  والشعارات والمحتوى النصي، مملوكة لحمادي استور وهي محمية بموجب
+  قوانين حقوق الملكية الفكرية. يُحظر نسخ أو توزيع أو تعديل أي
+  جزء من هذا الموقع دون إذن كتابي مسبق من صاحب الموقع.
+
+  This website and all its contents, including design, source code,
+  logos, and text content, are owned by Hamadi Store and are
+  protected under intellectual property laws. Copying, distributing,
+  or modifying any part of this website without prior written
+  permission from the owner is strictly prohibited.
+
+  التواصل / Contact: https://wa.me/218946678902
+  ================================================================
+-->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;border:0 solid #2a3354;}
+:root{
+--bg:#0d1117;--card:#111827;--border:#1e2d4a;--primary:#3b82f6;--primary-glow:rgba(59,130,246,0.4);
+--fg:#e2e8f0;--muted:#64748b;--muted-bg:#162032;--success:#22c55e;--warning:#f59e0b;--danger:#ef4444;
+}
+html.light{
+--bg:#f8fafc;--card:#ffffff;--border:#e2e8f0;--primary:#2563eb;--primary-glow:rgba(37,99,235,0.25);
+--fg:#0f172a;--muted:#64748b;--muted-bg:#f1f5f9;--success:#16a34a;--warning:#d97706;--danger:#dc2626;
+}
+html.light body{background:var(--bg);}
+html.light .header{background:rgba(255,255,255,0.95);}
+html.light .bottom-nav{background:rgba(255,255,255,0.95);}
+html.light .admin-topbar{background:rgba(255,255,255,0.95);}
+html.light .admin-bottom-nav{background:rgba(255,255,255,0.95);}
+html.light .game-card-overlay{background:linear-gradient(to top,rgba(255,255,255,0.9),transparent);}
+html.light .game-card-name{color:#0f172a;}
+html.light .banner-overlay{background:linear-gradient(to top,rgba(0,0,0,0.5),transparent);}
+body{transition:background 0.3s,color 0.3s;}
+.header,.card,.admin-card,.modal,.game-card,.pkg-card,.order-item,.account-card{transition:background 0.3s,border-color 0.3s,color 0.3s;}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;direction:rtl;overflow-x:hidden;}
+
+.page{display:none;min-height:100vh;padding-bottom:80px;}
+.page.active{display:block;}
+
+.header{position:sticky;top:0;z-index:40;background:rgba(17,24,39,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.header-top{display:flex;align-items:center;gap:12px;padding:12px 16px;}
+.header-title{flex:1;}
+.header-title h1{font-size:18px;font-weight:800;color:var(--primary);}
+.header-title p{font-size:11px;color:var(--muted);margin-top:1px;}
+.header-icon{width:40px;height:40px;border-radius:12px;background:rgba(59,130,246,0.15);display:flex;align-items:center;justify-content:center;}
+.search-box{padding:0 16px 12px;}
+.search-input{width:100%;background:var(--muted-bg);border:1px solid var(--border);border-radius:12px;padding:10px 40px 10px 16px;font-size:13px;color:var(--fg);font-family:'Cairo',sans-serif;outline:none;}
+.search-input:focus{border-color:var(--primary);box-shadow:0 0 0 2px rgba(59,130,246,0.2);}
+.search-input::placeholder{color:var(--muted);}
+.search-icon{position:absolute;right:28px;top:50%;transform:translateY(-50%);color:var(--muted);}
+.search-wrap{position:relative;}
+
+.banner{position:relative;margin:16px;border-radius:16px;overflow:hidden;height:160px;background:var(--muted-bg);}
+.banner-slide{position:absolute;inset:0;transition:opacity 0.7s ease;opacity:0;}
+.banner-slide.active{opacity:1;}
+.banner-slide img{width:100%;height:100%;object-fit:cover;}
+.banner-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent);}
+.banner-title{position:absolute;bottom:12px;right:16px;color:#fff;font-weight:700;font-size:14px;}
+.banner-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:4px;}
+.dot{width:6px;height:6px;border-radius:3px;background:rgba(255,255,255,0.4);transition:all 0.3s;cursor:pointer;}
+.dot.active{width:16px;background:var(--primary);}
+
+.section{padding:0 16px;margin-top:20px;}
+.section-title{font-size:13px;font-weight:600;color:var(--muted);margin-bottom:12px;}
+.games-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.game-card{position:relative;height:144px;border-radius:16px;overflow:hidden;border:1px solid var(--border);cursor:pointer;text-align:right;transition:transform 0.2s,box-shadow 0.2s;}
+.game-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(59,130,246,0.25);}
+.game-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.4;}
+.game-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85),transparent);}
+.game-card-info{position:absolute;bottom:0;right:0;left:0;padding:12px;}
+.game-card-name{color:#fff;font-weight:700;font-size:13px;line-height:1.3;}
+.game-card-cta{color:var(--primary);font-size:11px;margin-top:2px;}
+
+.back-btn{display:flex;align-items:center;gap:6px;padding:12px 16px;color:var(--muted);font-size:14px;cursor:pointer;background:none;}
+.back-btn:hover{color:var(--fg);}
+.game-hero{margin:0 16px 20px;border-radius:16px;overflow:hidden;height:180px;position:relative;background:var(--muted-bg);}
+.game-hero img{width:100%;height:100%;object-fit:cover;opacity:0.6;}
+.game-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.8),transparent);}
+.game-hero-title{position:absolute;bottom:16px;right:16px;color:#fff;font-size:20px;font-weight:800;}
+.player-input-wrap{padding:0 16px 16px;}
+.player-label{font-size:13px;font-weight:600;margin-bottom:8px;color:var(--fg);}
+.player-input{width:100%;background:var(--muted-bg);border:1px solid var(--border);border-radius:12px;padding:12px 16px;font-size:14px;color:var(--fg);font-family:'Cairo',sans-serif;outline:none;}
+.player-input:focus{border-color:var(--primary);}
+.packages-title{font-size:13px;font-weight:600;color:var(--muted);padding:0 16px;margin-bottom:12px;}
+.packages-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px;}
+.pkg-card{background:var(--card);border:2px solid var(--border);border-radius:14px;padding:14px;cursor:pointer;transition:all 0.2s;position:relative;text-align:center;}
+.pkg-card:hover{border-color:var(--primary);background:rgba(59,130,246,0.08);}
+.pkg-card.selected{border-color:var(--primary);background:rgba(59,130,246,0.12);box-shadow:0 0 20px rgba(59,130,246,0.2);}
+.pkg-popular{position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:var(--primary);color:#fff;font-size:10px;font-weight:700;padding:2px 10px;border-radius:20px;white-space:nowrap;}
+.pkg-name{font-size:13px;font-weight:700;margin-bottom:4px;}
+.pkg-amount{font-size:11px;color:var(--muted);margin-bottom:8px;}
+.pkg-price{font-size:16px;font-weight:800;color:var(--primary);}
+.pkg-price span{font-size:11px;color:var(--muted);font-weight:400;}
+.order-btn{display:block;width:calc(100% - 32px);margin:20px 16px;padding:14px;background:var(--primary);color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;box-shadow:0 0 20px rgba(59,130,246,0.4);transition:opacity 0.2s;}
+.order-btn:hover{opacity:0.9;}
+.order-btn:disabled{opacity:0.5;cursor:not-allowed;}
+
+.orders-empty{text-align:center;padding:60px 16px;color:var(--muted);}
+.orders-list{padding:0 16px;}
+.order-item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px;}
+.order-item-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
+.order-num{font-size:12px;font-weight:700;color:var(--primary);}
+.order-status{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;border:1px solid;}
+.status-pending{background:rgba(245,158,11,0.15);color:#f59e0b;border-color:rgba(245,158,11,0.3);}
+.status-processing{background:rgba(59,130,246,0.15);color:#3b82f6;border-color:rgba(59,130,246,0.3);}
+.status-completed{background:rgba(34,197,94,0.15);color:#22c55e;border-color:rgba(34,197,94,0.3);}
+.status-cancelled{background:rgba(239,68,68,0.15);color:#ef4444;border-color:rgba(239,68,68,0.3);}
+.order-game{font-size:14px;font-weight:700;}
+.order-pkg{font-size:12px;color:var(--muted);}
+.order-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:8px;}
+.order-price{font-size:15px;font-weight:800;color:var(--primary);}
+.order-date{font-size:11px;color:var(--muted);}
+
+.account-card{margin:16px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;text-align:center;}
+.account-avatar{width:64px;height:64px;border-radius:50%;background:rgba(59,130,246,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;}
+.account-name{font-size:18px;font-weight:800;margin-bottom:4px;}
+.account-phone{font-size:13px;color:var(--muted);}
+.account-row{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border);}
+.account-row:last-child{border-bottom:none;}
+.account-row-label{font-size:14px;display:flex;align-items:center;gap:8px;}
+.account-row-value{font-size:13px;color:var(--muted);}
+.logout-btn{display:block;width:calc(100% - 32px);margin:16px;padding:13px;background:rgba(239,68,68,0.1);color:#ef4444;border:1px solid rgba(239,68,68,0.3);border-radius:14px;font-size:14px;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:100;display:flex;align-items:flex-end;justify-content:center;}
+.modal{background:var(--card);border-radius:24px 24px 0 0;padding:24px 20px 40px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;}
+.modal-title{font-size:18px;font-weight:800;margin-bottom:4px;}
+.modal-sub{font-size:13px;color:var(--muted);margin-bottom:20px;}
+.form-group{margin-bottom:14px;}
+.form-label{font-size:12px;font-weight:600;color:var(--muted);margin-bottom:6px;display:block;}
+.form-input{width:100%;background:var(--muted-bg);border:1px solid var(--border);border-radius:12px;padding:12px 16px;font-size:14px;color:var(--fg);font-family:'Cairo',sans-serif;outline:none;}
+.form-input:focus{border-color:var(--primary);}
+.submit-btn{width:100%;padding:14px;background:var(--primary);color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;margin-top:6px;box-shadow:0 0 20px rgba(59,130,246,0.3);}
+.tab-btns{display:flex;gap:0;background:var(--muted-bg);border-radius:12px;padding:4px;margin-bottom:20px;}
+.tab-btn{flex:1;padding:8px;border:none;background:transparent;color:var(--muted);font-family:'Cairo',sans-serif;font-size:13px;font-weight:600;border-radius:10px;cursor:pointer;}
+.tab-btn.active{background:var(--primary);color:#fff;}
+.switch-text{text-align:center;margin-top:14px;font-size:13px;color:var(--muted);}
+.switch-link{color:var(--primary);cursor:pointer;}
+
+.success-modal{text-align:center;padding:20px 0;}
+.success-icon{width:72px;height:72px;border-radius:50%;background:rgba(34,197,94,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;}
+.success-title{font-size:20px;font-weight:800;margin-bottom:8px;}
+.success-sub{font-size:13px;color:var(--muted);margin-bottom:20px;}
+.success-detail{background:var(--muted-bg);border-radius:12px;padding:14px;text-align:right;margin-bottom:20px;}
+.detail-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);}
+.detail-row:last-child{border-bottom:none;}
+.detail-label{font-size:12px;color:var(--muted);}
+.detail-value{font-size:12px;font-weight:700;}
+
+.bottom-nav{position:fixed;bottom:0;right:0;left:0;z-index:50;border-top:1px solid var(--border);background:rgba(17,24,39,0.95);backdrop-filter:blur(12px);}
+.nav-items{display:flex;justify-content:space-around;padding:8px 16px;max-width:480px;margin:0 auto;}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 16px;border-radius:12px;cursor:pointer;transition:all 0.2s;background:none;border:none;color:var(--muted);font-family:'Cairo',sans-serif;}
+.nav-item.active{color:var(--primary);}
+.nav-dot{width:4px;height:4px;border-radius:50%;background:var(--primary);margin-top:2px;}
+.nav-label{font-size:10px;font-weight:600;}
+
+.wa-btn{position:fixed;bottom:88px;left:16px;z-index:50;width:48px;height:48px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.4);text-decoration:none;}
+
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.shimmer{background:linear-gradient(90deg,var(--muted-bg) 25%,#1e2d4a 50%,var(--muted-bg) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:16px;}
+
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#1e293b;border:1px solid var(--border);color:var(--fg);padding:10px 20px;border-radius:12px;font-size:13px;font-weight:600;z-index:200;transition:opacity 0.3s;}
+.toast.error{border-color:rgba(239,68,68,0.5);color:#ef4444;}
+.toast.success{border-color:rgba(34,197,94,0.5);color:#22c55e;}
+</style>
+</head>
+<body>
+  <div class="page active" id="page-home">
+  <div class="header">
+    <div class="header-top">
+      <div class="header-title">
+        <h1>حمادي استور</h1>
+        <p>متجر شحن الألعاب الرقمية</p>
+      </div>
+      <button class="header-icon" id="theme-toggle" onclick="toggleTheme()" style="cursor:pointer;">
+        <svg id="theme-icon-moon" width="20" height="20" fill="none" stroke="#3b82f6" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <svg id="theme-icon-sun" width="20" height="20" fill="none" stroke="#f59e0b" stroke-width="2" viewBox="0 0 24 24" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
+    <div class="search-box">
+      <div class="search-wrap">
+        <input class="search-input" id="search-input" type="search" placeholder="ابحث عن لعبة أو خدمة..." oninput="filterGames(this.value)"/>
+        <svg class="search-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="banner" id="banner">
+    <div class="banner-slide active" id="slide-0">
+      <img src="https://i.imgur.com/Yf8SMNJ.png" alt="banner" onerror="this.src='https://placehold.co/400x160/111827/3b82f6?text=حمادي+استور'"/>
+      <div class="banner-overlay"></div>
+      <div class="banner-title">عروض حمادي استور</div>
+    </div>
+    <div class="banner-slide" id="slide-1">
+      <img src="https://i.imgur.com/Xs9WNWX.png" alt="banner" onerror="this.src='https://placehold.co/400x160/111827/3b82f6?text=شحن+فوري'"/>
+      <div class="banner-overlay"></div>
+      <div class="banner-title">شحن فوري وآمن</div>
+    </div>
+    <div class="banner-dots">
+      <div class="dot active" onclick="goBanner(0)"></div>
+      <div class="dot" onclick="goBanner(1)"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title" id="games-section-title">الألعاب والخدمات</div>
+    <div class="games-grid" id="games-grid">
+      <div class="shimmer" style="height:144px"></div>
+      <div class="shimmer" style="height:144px"></div>
+      <div class="shimmer" style="height:144px"></div>
+      <div class="shimmer" style="height:144px"></div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-game">
+  <div class="header">
+    <button class="back-btn" onclick="goPage('home')">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+      رجوع
+    </button>
+  </div>
+  <div class="game-hero">
+    <img id="game-hero-img" src="" alt="" onerror="this.src='https://placehold.co/400x180/111827/3b82f6?text=اللعبة'"/>
+    <div class="game-hero-overlay"></div>
+    <div class="game-hero-title" id="game-hero-title"></div>
+  </div>
+  <div class="player-input-wrap">
+    <div class="player-label">معرف اللاعب (Player ID)</div>
+    <input class="player-input" id="player-id-input" type="text" placeholder="أدخل معرف اللاعب..."/>
+  </div>
+  <div class="packages-title" id="packages-title">اختر الباقة</div>
+  <div class="packages-grid" id="packages-grid"></div>
+  <button class="order-btn" id="order-btn" onclick="placeOrder()">اشحن الآن</button>
+</div>
+
+<div class="page" id="page-orders">
+  <div class="header">
+    <div class="header-top">
+      <div class="header-title">
+        <h1 style="color:var(--fg)">طلباتي</h1>
+        <p>سجل طلباتك السابقة</p>
+      </div>
+    </div>
+  </div>
+  <div id="orders-content"></div>
+</div>
+
+<div class="page" id="page-account">
+  <div class="header">
+    <div class="header-top">
+      <div class="header-title">
+        <h1 style="color:var(--fg)">حسابي</h1>
+      </div>
+    </div>
+  </div>
+  <div id="account-content"></div>
+</div>
+
+<div class="page" id="page-settings">
+  <div class="header">
+    <div class="header-top">
+      <div class="header-title">
+        <h1 style="color:var(--fg)">الإعدادات</h1>
+      </div>
+    </div>
+  </div>
+  <div style="padding:16px;color:var(--muted);text-align:center;padding-top:60px">
+    <p>للتواصل معنا عبر واتساب</p>
+    <a id="settings-wa-link" href="#" target="_blank" style="color:var(--primary);font-weight:700;display:block;margin-top:8px" id="settings-wa-link">جاري التحميل...</a>
+  </div>
+</div>
+
+<div class="modal-overlay" id="auth-modal" style="display:none" onclick="closeAuthIfBg(event)">
+  <div class="modal">
+    <div class="tab-btns">
+      <button class="tab-btn active" id="tab-login" onclick="switchTab('login')">تسجيل الدخول</button>
+      <button class="tab-btn" id="tab-register" onclick="switchTab('register')">إنشاء حساب</button>
+    </div>
+    <div id="login-form">
+      <div class="modal-title">مرحباً بك</div>
+      <div class="modal-sub">سجل دخولك للمتابعة</div>
+      <div class="form-group">
+        <label class="form-label">رقم الهاتف</label>
+        <input class="form-input" id="login-phone" type="tel" placeholder="09xxxxxxxx"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">كلمة المرور</label>
+        <input class="form-input" id="login-pass" type="password" placeholder="••••••••"/>
+      </div>
+      <button class="submit-btn" onclick="doLogin()">تسجيل الدخول</button>
+      <div style="display:flex;align-items:center;gap:10px;margin:16px 0">
+        <div style="flex:1;height:1px;background:var(--border)"></div>
+        <span style="font-size:11px;color:var(--muted)">أو</span>
+        <div style="flex:1;height:1px;background:var(--border)"></div>
+      </div>
+      <button onclick="doGoogleLogin()" style="width:100%;padding:12px;background:var(--muted-bg);border:1px solid var(--border);border-radius:14px;font-size:14px;font-weight:700;font-family:'Cairo',sans-serif;color:var(--fg);cursor:pointer">المتابعة عبر Google</button>
+    </div>
+    <div id="register-form" style="display:none">
+      <div class="modal-title">إنشاء حساب</div>
+      <div class="modal-sub">أنشئ حسابك للبدء</div>
+      <div class="form-group">
+        <label class="form-label">الاسم</label>
+        <input class="form-input" id="reg-name" type="text" placeholder="الاسم الكامل"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">رقم الهاتف</label>
+        <input class="form-input" id="reg-phone" type="tel" placeholder="09xxxxxxxx"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">كلمة المرور</label>
+        <input class="form-input" id="reg-pass" type="password" placeholder="••••••••"/>
+      </div>
+      <button class="submit-btn" onclick="doRegister()">إنشاء الحساب</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div class="modal-overlay" id="payment-modal" style="display:none">
+  <div class="modal">
+    <div class="modal-title">إتمام الدفع</div>
+    <div class="modal-sub">حوّل المبلغ على الرقم أدناه ثم أدخل بيانات التحويل</div>
+
+    <div style="background:var(--muted-bg);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:18px;text-align:center">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:6px">رقم التحويل (ليبيانا موبايل كاش)</div>
+      <div id="payment-phone-display" style="font-size:24px;font-weight:800;color:var(--primary);letter-spacing:1px;direction:ltr">...</div>
+      <button onclick="copyPaymentPhone()" style="margin-top:8px;background:none;border:1px solid var(--border);color:var(--muted);font-size:12px;padding:5px 14px;border-radius:8px;cursor:pointer;font-family:'Cairo',sans-serif">نسخ الرقم</button>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.25);border-radius:12px;padding:12px 16px;margin-bottom:18px">
+      <span style="font-size:13px;color:var(--muted)">المبلغ المطلوب تحويله</span>
+      <span id="payment-amount-display" style="font-size:18px;font-weight:800;color:var(--primary)">0 د.ل</span>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">رقم الهاتف الذي حوّلت منه</label>
+      <input class="form-input" id="payment-sender-phone" type="tel" placeholder="09xxxxxxxx"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">رقم عملية التحويل (إن وجد)</label>
+      <input class="form-input" id="payment-tx-id" type="text" placeholder="اختياري"/>
+    </div>
+
+    <div id="payment-err" style="color:#ef4444;font-size:12px;margin-bottom:8px;display:none"></div>
+
+    <button class="submit-btn" onclick="confirmPayment()">تم التحويل، تأكيد الطلب</button>
+    <button onclick="cancelPayment()" style="width:100%;padding:12px;background:none;border:none;color:var(--muted);font-size:13px;font-family:'Cairo',sans-serif;cursor:pointer;margin-top:6px">إلغاء</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="success-modal" style="display:none">
+  <div class="modal">
+    <div class="success-modal">
+      <div class="success-icon">
+        <svg width="32" height="32" fill="none" stroke="#22c55e" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <div class="success-title">تم إرسال طلبك!</div>
+      <div class="success-sub">سنتحقق من التحويل ونبدأ الشحن خلال وقت قصير</div>
+      <div class="success-detail" id="success-detail"></div>
+      <button class="submit-btn" onclick="closeSuccess()">حسناً</button>
+    </div>
+  </div>
+</div>
+
+<div id="copyright-bar" style="text-align:center;padding:6px 16px;font-size:10px;color:var(--muted);border-top:1px solid var(--border);background:var(--card);">
+  © <span id="copyright-year"></span> حمادي استور — جميع الحقوق محفوظة
+</div>
+
+<nav class="bottom-nav">
+  <div class="nav-items">
+    <button class="nav-item active" id="nav-home" onclick="goPage('home')">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span class="nav-label">الرئيسية</span>
+      <div class="nav-dot" id="dot-home"></div>
+    </button>
+    <button class="nav-item" id="nav-orders" onclick="goPage('orders')">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/></svg>
+      <span class="nav-label">طلباتي</span>
+      <div class="nav-dot" id="dot-orders" style="display:none"></div>
+    </button>
+    <button class="nav-item" id="nav-account" onclick="goPage('account')">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span class="nav-label">حسابي</span>
+      <div class="nav-dot" id="dot-account" style="display:none"></div>
+    </button>
+    <button class="nav-item" id="nav-settings" onclick="goPage('settings')">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg>
+      <span class="nav-label">الإعدادات</span>
+      <div class="nav-dot" id="dot-settings" style="display:none"></div>
+    </button>
+  </div>
+</nav>
+
+<a href="#" target="_blank" class="wa-btn" id="wa-float-btn">
+  <svg width="24" height="24" fill="#fff" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<style>
+/* ADMIN */
+.admin-overlay{position:fixed;inset:0;background:var(--bg);z-index:200;display:none;flex-direction:column;}
+.admin-overlay.open{display:flex;}
+.admin-sidebar{position:fixed;top:0;right:0;bottom:0;width:220px;background:var(--card);border-left:1px solid var(--border);padding:16px 12px;display:flex;flex-direction:column;gap:4px;z-index:210;transform:translateX(100%);transition:transform 0.3s;}
+.admin-sidebar.open{transform:translateX(0);}
+.admin-sidebar-title{padding:8px 12px;margin-bottom:8px;}
+.admin-sidebar-title h2{font-size:14px;font-weight:800;color:var(--primary);}
+.admin-sidebar-title p{font-size:11px;color:var(--muted);}
+.admin-nav-link{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:12px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;transition:all 0.2s;background:none;border:none;font-family:'Cairo',sans-serif;width:100%;text-align:right;}
+.admin-nav-link:hover{background:var(--muted-bg);color:var(--fg);}
+.admin-nav-link.active{background:rgba(59,130,246,0.15);color:var(--primary);}
+.admin-main{flex:1;overflow-y:auto;padding:16px;padding-bottom:80px;}
+.admin-topbar{display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(17,24,39,0.95);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:5;}
+.admin-page-title{flex:1;font-size:16px;font-weight:800;}
+.admin-bottom-nav{position:fixed;bottom:0;right:0;left:0;background:rgba(17,24,39,0.95);border-top:1px solid var(--border);display:flex;overflow-x:auto;z-index:5;padding:4px 0;}
+.admin-bottom-btn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 12px;font-size:9px;color:var(--muted);cursor:pointer;background:none;border:none;font-family:'Cairo',sans-serif;min-width:60px;flex-shrink:0;}
+.admin-bottom-btn.active{color:var(--primary);}
+.admin-section{display:none;}
+.admin-section.active{display:block;}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;}
+.stat-value{font-size:24px;font-weight:800;margin:4px 0;}
+.stat-label{font-size:11px;color:var(--muted);}
+.admin-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px;}
+.admin-input{width:100%;background:var(--muted-bg);border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-size:13px;color:var(--fg);font-family:'Cairo',sans-serif;outline:none;margin-bottom:8px;}
+.admin-input:focus{border-color:var(--primary);}
+.admin-btn{padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:6px;}
+.admin-btn-primary{background:var(--primary);color:#fff;}
+.admin-btn-danger{background:rgba(239,68,68,0.1);color:#ef4444;border:1px solid rgba(239,68,68,0.3);}
+.admin-btn-sm{padding:6px 12px;font-size:11px;border-radius:8px;}
+.admin-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);}
+.admin-row:last-child{border-bottom:none;}
+.admin-row-info{flex:1;min-width:0;}
+.admin-row-title{font-size:13px;font-weight:700;}
+.admin-row-sub{font-size:11px;color:var(--muted);}
+.admin-select{background:var(--muted-bg);border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:12px;color:var(--fg);font-family:'Cairo',sans-serif;outline:none;}
+.add-form{background:var(--muted-bg);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:14px;}
+.badge{display:inline-flex;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;border:1px solid;}
+.badge-pending{background:rgba(245,158,11,0.15);color:#f59e0b;border-color:rgba(245,158,11,0.3);}
+.badge-processing{background:rgba(59,130,246,0.15);color:#3b82f6;border-color:rgba(59,130,246,0.3);}
+.badge-completed{background:rgba(34,197,94,0.15);color:#22c55e;border-color:rgba(34,197,94,0.3);}
+.badge-cancelled{background:rgba(239,68,68,0.15);color:#ef4444;border-color:rgba(239,68,68,0.3);}
+.admin-search{width:100%;background:var(--muted-bg);border:1px solid var(--border);border-radius:10px;padding:9px 14px;font-size:13px;color:var(--fg);font-family:'Cairo',sans-serif;outline:none;margin-bottom:12px;}
+.spin{animation:spin 1s linear infinite;}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.pkg-list-item{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);}
+.toggle-icon{cursor:pointer;font-size:18px;}
+</style>
+
+<!-- ADMIN OVERLAY -->
+<div class="admin-overlay" id="admin-overlay">
+  <!-- Topbar -->
+  <div class="admin-topbar">
+    <button onclick="closeAdmin()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px">←</button>
+    <div class="admin-page-title" id="admin-page-title">لوحة الإدارة</div>
+    <button onclick="adminLogout()" style="background:none;border:none;color:var(--danger);cursor:pointer;font-size:12px;font-family:Cairo,sans-serif">خروج</button>
+  </div>
+
+  <!-- Main -->
+  <div class="admin-main">
+    <!-- Dashboard -->
+    <div class="admin-section active" id="asec-dashboard">
+      <div class="stat-grid" id="dash-stats">
+        <div class="stat-card"><div class="stat-value" style="color:var(--primary)" id="st-orders">0</div><div class="stat-label">إجمالي الطلبات</div></div>
+        <div class="stat-card"><div class="stat-value" style="color:#f59e0b" id="st-pending">0</div><div class="stat-label">قيد المراجعة</div></div>
+        <div class="stat-card"><div class="stat-value" style="color:#22c55e" id="st-users">0</div><div class="stat-label">المستخدمون</div></div>
+        <div class="stat-card"><div class="stat-value" style="color:var(--primary)" id="st-revenue">0</div><div class="stat-label">الإيرادات (د.ل)</div></div>
+      </div>
+      <div class="admin-card">
+        <div style="font-size:13px;font-weight:700;margin-bottom:10px">آخر الطلبات</div>
+        <div id="dash-recent-orders"><div style="color:var(--muted);font-size:12px;text-align:center;padding:20px">جاري التحميل...</div></div>
+      </div>
+    </div>
+
+    <!-- Orders -->
+    <div class="admin-section" id="asec-orders">
+      <input class="admin-search" id="orders-search" placeholder="بحث بالطلب أو اللعبة أو ID اللاعب..." oninput="filterAdminOrders()"/>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
+        <button class="admin-btn admin-btn-sm" style="background:var(--muted-bg);color:var(--fg);border:1px solid var(--border)" onclick="setOrderFilter('all')">الكل</button>
+        <button class="admin-btn admin-btn-sm badge-pending" onclick="setOrderFilter('pending')">قيد المراجعة</button>
+        <button class="admin-btn admin-btn-sm badge-processing" onclick="setOrderFilter('processing')">جاري التنفيذ</button>
+        <button class="admin-btn admin-btn-sm badge-completed" onclick="setOrderFilter('completed')">تم الشحن</button>
+        <button class="admin-btn admin-btn-sm badge-cancelled" onclick="setOrderFilter('cancelled')">ملغي</button>
+      </div>
+      <div id="admin-orders-list"></div>
+    </div>
+
+    <!-- Games -->
+    <div class="admin-section" id="asec-games">
+      <div class="add-form">
+        <div style="font-size:13px;font-weight:700;margin-bottom:10px">إضافة لعبة جديدة</div>
+        <input class="admin-input" id="ng-name" placeholder="اسم اللعبة"/>
+        <input class="admin-input" id="ng-image" placeholder="رابط صورة اللعبة (URL)"/>
+        <input class="admin-input" id="ng-apiUrl" placeholder="رابط API (اختياري — للربط مع خدمة خارجية)"/>
+        <button class="admin-btn admin-btn-primary" onclick="addAdminGame()">إضافة لعبة</button>
+      </div>
+      <div id="admin-games-list"></div>
+    </div>
+
+    <!-- Users -->
+    <div class="admin-section" id="asec-users">
+      <input class="admin-search" id="users-search" placeholder="بحث بالاسم أو الهاتف..." oninput="filterAdminUsers()"/>
+      <div id="admin-users-list"></div>
+    </div>
+
+    <!-- Banners -->
+    <div class="admin-section" id="asec-banners">
+      <div class="add-form">
+        <div style="font-size:13px;font-weight:700;margin-bottom:10px">إضافة بانر</div>
+        <input class="admin-input" id="nb-title" placeholder="عنوان البانر"/>
+        <input class="admin-input" id="nb-image" placeholder="رابط الصورة (URL)"/>
+        <input class="admin-input" id="nb-link" placeholder="رابط التوجيه (اختياري)"/>
+        <button class="admin-btn admin-btn-primary" onclick="addAdminBanner()">إضافة</button>
+      </div>
+      <div id="admin-banners-list"></div>
+    </div>
+
+    <!-- Settings -->
+    <div class="admin-section" id="asec-settings">
+      <div class="admin-card">
+        <div style="font-size:13px;font-weight:700;margin-bottom:12px">إعدادات المتجر</div>
+        <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px">اسم المتجر</label>
+        <input class="admin-input" id="set-storeName" value="حمادي استور"/>
+        <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px">العنوان الرئيسي</label>
+        <input class="admin-input" id="set-heroTitle" value="متجر شحن الألعاب الرقمية"/>
+        <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px">رمز العملة</label>
+        <input class="admin-input" id="set-currency" value="د.ل"/>
+        <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px">رقم واتساب</label>
+        <input class="admin-input" id="set-whatsapp" value="218946678902"/>
+        <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px">رقم التحويل لاستلام الدفعات (موبايل كاش)</label>
+        <input class="admin-input" id="set-paymentPhone" value="0910000000" placeholder="09xxxxxxxx"/>
+        <button class="admin-btn admin-btn-primary" onclick="saveAdminSettings()">حفظ الإعدادات</button>
+        <div id="settings-msg" style="margin-top:8px;font-size:12px;color:#22c55e;display:none">تم الحفظ ✓</div>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="admin-section" id="asec-contact">
+      <div class="add-form">
+        <div style="font-size:13px;font-weight:700;margin-bottom:10px">إضافة رقم تواصل</div>
+        <input class="admin-input" id="nc-phone" placeholder="رقم الهاتف"/>
+        <input class="admin-input" id="nc-label" placeholder="التسمية (واتساب، تيليجرام...)"/>
+        <button class="admin-btn admin-btn-primary" onclick="addAdminContact()">إضافة</button>
+      </div>
+      <div id="admin-contacts-list"></div>
+    </div>
+
+    <!-- Security -->
+    <div class="admin-section" id="asec-security">
+      <div style="display:flex;border-bottom:1px solid var(--border);margin-bottom:12px">
+        <button onclick="setSecTab('logs')" id="sec-tab-logs" style="padding:8px 16px;font-size:12px;font-weight:700;font-family:Cairo,sans-serif;background:none;border:none;color:var(--primary);border-bottom:2px solid var(--primary);cursor:pointer">سجل النشاط</button>
+        <button onclick="setSecTab('ips')" id="sec-tab-ips" style="padding:8px 16px;font-size:12px;font-weight:700;font-family:Cairo,sans-serif;background:none;border:none;color:var(--muted);cursor:pointer">IPs المحظورة</button>
+      </div>
+      <div id="sec-logs-section">
+        <div id="admin-logs-list"></div>
+      </div>
+      <div id="sec-ips-section" style="display:none">
+        <div style="display:flex;gap:8px;margin-bottom:12px">
+          <input class="admin-input" id="new-ip" placeholder="عنوان IP" style="flex:1;margin:0"/>
+          <button class="admin-btn admin-btn-danger admin-btn-sm" onclick="blockIp()">حظر</button>
+        </div>
+        <div id="admin-ips-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Nav -->
+  <div class="admin-bottom-nav">
+    <button class="admin-bottom-btn active" id="abn-dashboard" onclick="goAdminSection('dashboard')">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      الرئيسية
+    </button>
+    <button class="admin-bottom-btn" id="abn-orders" onclick="goAdminSection('orders')">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+      الطلبات
+    </button>
+    <button class="admin-bottom-btn" id="abn-games" onclick="goAdminSection('games')">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="6" y="11" width="4" height="4" rx="1"/><path d="M14 11h4M16 9v4"/><path d="M6 7h12a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2V9a2 2 0 012-2z"/></svg>
+      الألعاب
+    </button>
+    <button class="admin-bottom-btn" id="abn-users" onclick="goAdminSection('users')">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      المستخدمون
+    </button>
+    <button class="admin-bottom-btn" id="abn-banners" onclick="goAdminSection('banners')">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      البانرات
+    </button>
+    <button class="admin-bottom-btn" id="abn-settings" onclick="goAdminSection('settings')">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      الإعدادات
+    </button>
+    <button class="admin-bottom-btn" id="abn-contact" onclick="goAdminSection('contact')">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.82a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6z"/></svg>
+      التواصل
+    </button>
+    <button class="admin-bottom-btn" id="abn-security" onclick="goAdminSection('security')">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      الأمان
+    </button>
+  </div>
+</div>
+
+
+<script>
+/* ============================================================
+   نظام تصحيح الأخطاء (Debug Panel)
+   - يسجل كل الأخطاء تلقائياً في الذاكرة وبـ localStorage
+   - يظهر زر عائم 🐞 للأدمن فقط لفتح سجل الأخطاء كامل
+   - يبقى نظام "تعذر التحميل" الطارئ شغّال حتى قبل تسجيل الدخول
+   ============================================================ */
+window.__debugLog = [];
+window.__appLoaded = false;
+
+function debugLogAdd(type, msg, extra){
+  const entry = {
+    type, msg: String(msg),
+    extra: extra ? JSON.stringify(extra, Object.getOwnPropertyNames(extra)) : '',
+    time: new Date().toLocaleTimeString('ar-LY')
+  };
+  window.__debugLog.unshift(entry);
+  if(window.__debugLog.length > 100) window.__debugLog.pop();
+  try{ localStorage.setItem('hamadi_debug_log', JSON.stringify(window.__debugLog.slice(0,50))); }catch(e){}
+  renderDebugPanelIfOpen();
+}
+
+function showFatalError(msg){
+  debugLogAdd('fatal', msg);
+  var box = document.getElementById('fatal-error-box');
+  if(!box){
+    box = document.createElement('div');
+    box.id = 'fatal-error-box';
+    box.style.cssText = 'position:fixed;inset:0;background:#0d1117;color:#ef4444;padding:20px;font-family:monospace;font-size:13px;z-index:9999;overflow:auto;direction:ltr;text-align:left;white-space:pre-wrap';
+    document.body.appendChild(box);
+  }
+  box.textContent += '\n\n' + msg;
+}
+
+window.addEventListener('error', function(e){
+  debugLogAdd('error', e.message, { filename: e.filename, lineno: e.lineno, colno: e.colno });
+  if(!window.__appLoaded){
+    showFatalError('ERROR: ' + e.message + '\nFile: ' + (e.filename||'') + '\nLine: ' + (e.lineno||''));
+  }
+});
+window.addEventListener('unhandledrejection', function(e){
+  const msg = e.reason && e.reason.message ? e.reason.message : String(e.reason);
+  debugLogAdd('promise', msg, { code: e.reason && e.reason.code });
+  if(!window.__appLoaded){
+    showFatalError('PROMISE ERROR: ' + msg);
+  }
+});
+setTimeout(function(){
+  if(!window.__appLoaded){
+    showFatalError('تعذر تحميل التطبيق خلال 6 ثوانٍ. السبب الأرجح: تعذر الوصول لخوادم Firebase.');
+  }
+}, 6000);
+
+/* ===== لوحة تصحيح الأخطاء (Debug Panel UI) ===== */
+function createDebugButton(){
+  if(document.getElementById('debug-fab')) return;
+  const fab = document.createElement('button');
+  fab.id = 'debug-fab';
+  fab.innerHTML = '🐞';
+  fab.style.cssText = 'position:fixed;bottom:150px;left:16px;z-index:9000;width:44px;height:44px;border-radius:50%;background:#1e293b;border:1px solid #334155;color:#fff;font-size:18px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;';
+  fab.onclick = toggleDebugPanel;
+  document.body.appendChild(fab);
+}
+
+function toggleDebugPanel(){
+  let panel = document.getElementById('debug-panel');
+  if(panel){ panel.remove(); return; }
+  panel = document.createElement('div');
+  panel.id = 'debug-panel';
+  panel.style.cssText = 'position:fixed;inset:0;background:#0d1117;z-index:9500;display:flex;flex-direction:column;font-family:monospace;direction:ltr;text-align:left;';
+  panel.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:#111827;border-bottom:1px solid #1e2d4a;direction:rtl">
+      <div style="color:#fff;font-weight:800;font-family:'Cairo',sans-serif;font-size:15px">🐞 سجل تصحيح الأخطاء</div>
+      <div style="display:flex;gap:8px">
+        <button onclick="copyAllDebugLog()" style="background:#1e3a8a;color:#fff;border:none;padding:7px 14px;border-radius:8px;font-size:12px;font-family:'Cairo',sans-serif;cursor:pointer">نسخ الكل</button>
+        <button onclick="clearDebugLog()" style="background:rgba(239,68,68,0.15);color:#ef4444;border:1px solid rgba(239,68,68,0.3);padding:7px 14px;border-radius:8px;font-size:12px;font-family:'Cairo',sans-serif;cursor:pointer">مسح</button>
+        <button onclick="toggleDebugPanel()" style="background:none;color:#94a3b8;border:none;font-size:20px;cursor:pointer;padding:0 6px">✕</button>
+      </div>
+    </div>
+    <div id="debug-log-list" style="flex:1;overflow-y:auto;padding:12px;font-size:11px;"></div>
+  `;
+  document.body.appendChild(panel);
+  renderDebugPanelIfOpen();
+}
+
+function renderDebugPanelIfOpen(){
+  const list = document.getElementById('debug-log-list');
+  if(!list) return;
+  if(!window.__debugLog.length){
+    list.innerHTML = '<div style="color:#64748b;text-align:center;padding:40px;direction:rtl;font-family:Cairo,sans-serif">لا توجد أخطاء مسجّلة 👍</div>';
+    return;
+  }
+  const colors = { error:'#ef4444', promise:'#f59e0b', fatal:'#dc2626', firebase:'#3b82f6', info:'#22c55e' };
+  list.innerHTML = window.__debugLog.map((e,i)=>`
+    <div style="background:#111827;border:1px solid #1e2d4a;border-right:3px solid ${colors[e.type]||'#64748b'};border-radius:8px;padding:10px;margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+        <span style="color:${colors[e.type]||'#94a3b8'};font-weight:bold;font-size:10px">${e.type.toUpperCase()}</span>
+        <span style="color:#475569;font-size:10px">${e.time}</span>
+      </div>
+      <div style="color:#e2e8f0;word-break:break-all;white-space:pre-wrap">${escapeHtml(e.msg)}</div>
+      ${e.extra ? `<div style="color:#64748b;font-size:10px;margin-top:4px;word-break:break-all">${escapeHtml(e.extra)}</div>` : ''}
+      <button onclick="copyDebugEntry(${i})" style="margin-top:6px;background:#1e293b;color:#94a3b8;border:1px solid #334155;padding:3px 10px;border-radius:6px;font-size:10px;cursor:pointer">نسخ هذا الخطأ</button>
+    </div>
+  `).join('');
+}
+
+function escapeHtml(s){
+  return String(s).replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
+}
+
+window.copyDebugEntry = function(i){
+  const e = window.__debugLog[i];
+  const text = `[${e.type}] ${e.time}\n${e.msg}\n${e.extra}`;
+  navigator.clipboard?.writeText(text);
+  alert('تم النسخ');
+}
+
+window.copyAllDebugLog = function(){
+  const text = window.__debugLog.map(e => `[${e.type}] ${e.time}\n${e.msg}\n${e.extra}`).join('\n\n---\n\n');
+  navigator.clipboard?.writeText(text || 'لا توجد أخطاء');
+  alert('تم نسخ كل السجل');
+}
+
+window.clearDebugLog = function(){
+  window.__debugLog = [];
+  localStorage.removeItem('hamadi_debug_log');
+  renderDebugPanelIfOpen();
+}
+
+window.toggleDebugPanel = toggleDebugPanel;
+
+/* تحميل سجل سابق محفوظ (لو الصفحة أعيد تحميلها) */
+try{
+  const saved = JSON.parse(localStorage.getItem('hamadi_debug_log') || '[]');
+  if(saved.length) window.__debugLog = saved;
+}catch(e){}
+</script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getFirestore, collection, getDocs, addDoc, doc, updateDoc, deleteDoc,
+  query, where, orderBy, onSnapshot, getDoc, setDoc
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import {
+  getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword,
+  signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD9uIYhgh7IJsjn8NpbHWQh3OvVx77-xhc",
+  authDomain: "hamadi-store-v2.firebaseapp.com",
+  projectId: "hamadi-store-v2",
+  storageBucket: "hamadi-store-v2.firebasestorage.app",
+  messagingSenderId: "189142570534",
+  appId: "1:189142570534:web:c4a92cad5402bd8eaff8e7"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+window.__appLoaded = true;
+
+let currentUser = null;
+let currentUserData = null;
+let currentGame = null;
+let selectedPkg = null;
+let bannerIdx = 0;
+let bannerTimer = null;
+let allGamesCache = [];
+let allOrdersUnsub = null;
+let orderFilter = 'all';
+let storeSettings = { paymentPhone: '0910000000', whatsapp: '218946678902' };
+
+function sanitize(str){
+  if(typeof str !== 'string') return '';
+  return str.replace(/[<>&"']/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function isValidPhone(p){ return /^09\d{8}$/.test(p) || /^\+?218\d{9}$/.test(p); }
+function isValidPlayerId(id){ return /^[a-zA-Z0-9]{3,20}$/.test(id); }
+function isValidPrice(n){ return !isNaN(n) && parseFloat(n) > 0 && parseFloat(n) < 100000; }
+
+/* ===== الحماية من محاولات الدخول الفاشلة المتكررة ===== */
+const LOGIN_LOCKOUT_KEY = 'hamadi_login_attempts';
+const MAX_LOGIN_ATTEMPTS = 5;
+const LOCKOUT_DURATION_MS = 5 * 60 * 1000; // 5 دقائق
+
+function getLoginAttempts(){
+  try{
+    const data = JSON.parse(localStorage.getItem(LOGIN_LOCKOUT_KEY) || '{"count":0,"lockedUntil":0}');
+    return data;
+  }catch(e){ return { count:0, lockedUntil:0 }; }
+}
+function isLoginLocked(){
+  const data = getLoginAttempts();
+  if(data.lockedUntil && Date.now() < data.lockedUntil){
+    const remainingSec = Math.ceil((data.lockedUntil - Date.now())/1000);
+    return remainingSec;
+  }
+  return 0;
+}
+function recordFailedLogin(){
+  const data = getLoginAttempts();
+  data.count = (data.count||0) + 1;
+  if(data.count >= MAX_LOGIN_ATTEMPTS){
+    data.lockedUntil = Date.now() + LOCKOUT_DURATION_MS;
+    data.count = 0;
+  }
+  localStorage.setItem(LOGIN_LOCKOUT_KEY, JSON.stringify(data));
+}
+function resetLoginAttempts(){
+  localStorage.removeItem(LOGIN_LOCKOUT_KEY);
+}
+
+/* ===== الحد من تكرار إرسال الطلبات (منع الإسبام) ===== */
+const ORDER_RATE_KEY = 'hamadi_order_timestamps';
+const MAX_ORDERS_PER_WINDOW = 3;
+const ORDER_WINDOW_MS = 60 * 1000; // دقيقة واحدة
+
+function isOrderRateLimited(){
+  try{
+    let timestamps = JSON.parse(localStorage.getItem(ORDER_RATE_KEY) || '[]');
+    const now = Date.now();
+    timestamps = timestamps.filter(t => now - t < ORDER_WINDOW_MS);
+    localStorage.setItem(ORDER_RATE_KEY, JSON.stringify(timestamps));
+    return timestamps.length >= MAX_ORDERS_PER_WINDOW;
+  }catch(e){ return false; }
+}
+function recordOrderAttempt(){
+  try{
+    let timestamps = JSON.parse(localStorage.getItem(ORDER_RATE_KEY) || '[]');
+    timestamps.push(Date.now());
+    localStorage.setItem(ORDER_RATE_KEY, JSON.stringify(timestamps));
+  }catch(e){}
+}
+
+onAuthStateChanged(auth, async (user) => {
+  currentUser = user;
+  if(user){
+    const userDoc = await getDoc(doc(db,"users",user.uid));
+    if(userDoc.exists()){
+      currentUserData = userDoc.data();
+    } else {
+      currentUserData = { uid:user.uid, email:user.email, name:user.email?.split('@')[0]||'مستخدم', phone:'', role:'customer' };
+      await setDoc(doc(db,"users",user.uid), currentUserData);
+    }
+    renderAccount();
+    loadOrders();
+    if(currentUserData?.role === 'admin' && typeof createDebugButton === 'function'){
+      createDebugButton();
+    }
+  } else {
+    currentUserData = null;
+    renderAccount();
+    const fab = document.getElementById('debug-fab');
+    if(fab) fab.remove();
+  }
+});
+
+window.addEventListener('DOMContentLoaded', async () => {
+  initTheme();
+  await loadGamesFromFirestore();
+  await loadStoreSettings();
+  startBanner();
+  // سنة حقوق النشر تلقائية
+  const yearEl = document.getElementById('copyright-year');
+  if(yearEl) yearEl.textContent = new Date().getFullYear();
+});
+
+async function loadStoreSettings(){
+  try{
+    const settingsDoc = await getDoc(doc(db,"settings","store"));
+    if(settingsDoc.exists()){
+      storeSettings = { ...storeSettings, ...settingsDoc.data() };
+      if(storeSettings.storeName){
+        const h1 = document.querySelector('.header-title h1');
+        if(h1) h1.textContent = storeSettings.storeName;
+      }
+      const waNum = storeSettings.whatsapp || '';
+      if(waNum){
+        const waUrl = 'https://wa.me/' + waNum;
+        // زر الواتساب العائم
+        const waFloat = document.getElementById('wa-float-btn');
+        if(waFloat) waFloat.href = waUrl;
+        // رابط صفحة الإعدادات
+        const waLink = document.getElementById('settings-wa-link');
+        if(waLink){
+          waLink.href = waUrl;
+          // عرض الرقم بصيغة محلية
+          const displayNum = waNum.startsWith('218') ? '0' + waNum.slice(3) : waNum;
+          waLink.textContent = displayNum;
+        }
+      }
+    }
+  }catch(e){ /* استخدم القيم الافتراضية */ }
+}
+
+window.toggleTheme = function(){
+  const html=document.documentElement;
+  const isLight=html.classList.toggle('light');
+  localStorage.setItem('hamadi_theme', isLight?'light':'dark');
+  document.getElementById('theme-icon-moon').style.display=isLight?'none':'';
+  document.getElementById('theme-icon-sun').style.display=isLight?'':'none';
+}
+function initTheme(){
+  const saved=localStorage.getItem('hamadi_theme');
+  if(saved==='light'){
+    document.documentElement.classList.add('light');
+    document.getElementById('theme-icon-moon').style.display='none';
+    document.getElementById('theme-icon-sun').style.display='';
+  }
+}
+
+function startBanner(){
+  bannerTimer = setInterval(()=>{
+    bannerIdx = (bannerIdx+1)%2;
+    updateBanner();
+  },4000);
+}
+window.goBanner = function(i){bannerIdx=i;updateBanner();}
+function updateBanner(){
+  document.querySelectorAll('.banner-slide').forEach((s,i)=>s.classList.toggle('active',i===bannerIdx));
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===bannerIdx));
+}
+
+async function loadGamesFromFirestore(){
+  try{
+    const snap = await getDocs(collection(db,"games"));
+    allGamesCache = snap.docs.map(d=>({id:d.id, ...d.data()}));
+    renderGames(allGamesCache);
+  }catch(e){
+    document.getElementById('games-grid').innerHTML =
+      '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted)">تعذر تحميل الألعاب</div>';
+  }
+}
+
+function renderGames(games){
+  const grid = document.getElementById('games-grid');
+  if(!games.length){
+    grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted)">لا توجد ألعاب بعد</div>';
+    return;
+  }
+  grid.innerHTML = games.map(g=>{
+    const img = g.image || `https://placehold.co/200x200/111827/3b82f6?text=${encodeURIComponent(g.name)}`;
+    return `<button class="game-card" onclick="openGame('${g.id}')">
+      <img src="${sanitize(img)}" alt="${sanitize(g.name)}" onerror="this.style.display='none'"/>
+      <div class="game-card-overlay"></div>
+      <div class="game-card-info">
+        <div class="game-card-name">${sanitize(g.name)}</div>
+        <div class="game-card-cta">اشحن الآن</div>
+      </div>
+    </button>`;
+  }).join('');
+}
+
+window.filterGames = function(q){
+  const title = document.getElementById('games-section-title');
+  const filtered = allGamesCache.filter(g=>g.name?.includes(q));
+  title.textContent = q ? `نتائج البحث (${filtered.length})` : 'الألعاب والخدمات';
+  renderGames(filtered);
+  document.getElementById('banner').style.display = q ? 'none' : '';
+}
+
+window.openGame = async function(id){
+  currentGame = allGamesCache.find(g=>g.id===id);
+  if(!currentGame) return;
+  selectedPkg = null;
+  document.getElementById('game-hero-img').src = currentGame.image || `https://placehold.co/400x180/111827/3b82f6?text=${encodeURIComponent(currentGame.name)}`;
+  document.getElementById('game-hero-title').textContent = currentGame.name;
+  document.getElementById('player-id-input').value = '';
+
+  const pkgGrid = document.getElementById('packages-grid');
+  pkgGrid.innerHTML = '<div class="shimmer" style="height:90px;grid-column:1/-1"></div>';
+  goPage('game');
+
+  const q = query(collection(db,"packages"), where("gameId","==",id));
+  const snap = await getDocs(q);
+  currentGame.packages = snap.docs.map(d=>({id:d.id, ...d.data()}));
+  renderPackages();
+}
+
+function renderPackages(){
+  const grid = document.getElementById('packages-grid');
+  if(!currentGame.packages.length){
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:20px;color:var(--muted);font-size:13px">لا توجد باقات لهذه اللعبة بعد</div>';
+    return;
+  }
+  grid.innerHTML = currentGame.packages.map(p=>`
+    <div class="pkg-card" id="pkg-${p.id}" onclick="selectPkg('${p.id}')">
+      ${p.popular?'<div class="pkg-popular">الأكثر طلباً</div>':''}
+      <div class="pkg-name">${sanitize(p.name)}</div>
+      ${p.amount?`<div class="pkg-amount">${sanitize(p.amount)}</div>`:''}
+      <div class="pkg-price">${p.price} <span>د.ل</span></div>
+    </div>
+  `).join('');
+}
+
+window.selectPkg = function(id){
+  selectedPkg = currentGame.packages.find(p=>p.id===id);
+  document.querySelectorAll('.pkg-card').forEach(c=>c.classList.remove('selected'));
+  document.getElementById('pkg-'+id).classList.add('selected');
+}
+window.placeOrder = function(){
+  if(!currentUser){ showToast('سجل الدخول أولاً','error'); openAuth(); return; }
+  if(!selectedPkg){ showToast('اختر باقة أولاً','error'); return; }
+  if(isOrderRateLimited()){ showToast('عدد كبير من الطلبات خلال وقت قصير، انتظر قليلاً وحاول مجدداً','error'); return; }
+
+  const pidRaw = document.getElementById('player-id-input').value.trim();
+  if(!pidRaw){ showToast('أدخل معرف اللاعب','error'); return; }
+  if(!isValidPlayerId(pidRaw)){ showToast('معرف اللاعب غير صالح','error'); return; }
+
+  document.getElementById('payment-phone-display').textContent = storeSettings.paymentPhone || '0910000000';
+  document.getElementById('payment-amount-display').textContent = selectedPkg.price + ' د.ل';
+  document.getElementById('payment-sender-phone').value = '';
+  document.getElementById('payment-tx-id').value = '';
+  document.getElementById('payment-err').style.display = 'none';
+  document.getElementById('payment-modal').style.display = 'flex';
+}
+
+window.cancelPayment = function(){
+  document.getElementById('payment-modal').style.display = 'none';
+}
+
+window.copyPaymentPhone = function(){
+  const phone = document.getElementById('payment-phone-display').textContent;
+  navigator.clipboard?.writeText(phone);
+  showToast('تم نسخ الرقم','success');
+}
+
+window.confirmPayment = async function(){
+  const senderPhone = document.getElementById('payment-sender-phone').value.trim();
+  const txId = document.getElementById('payment-tx-id').value.trim();
+  const errBox = document.getElementById('payment-err');
+  errBox.style.display = 'none';
+
+  if(!senderPhone){ errBox.textContent = 'أدخل رقم الهاتف الذي حوّلت منه'; errBox.style.display='block'; return; }
+  if(!isValidPhone(senderPhone)){ errBox.textContent = 'رقم الهاتف غير صالح'; errBox.style.display='block'; return; }
+
+  const pidRaw = document.getElementById('player-id-input').value.trim();
+  const confirmBtn = document.querySelector('#payment-modal .submit-btn');
+  confirmBtn.disabled = true;
+  confirmBtn.textContent = 'جاري التأكيد...';
+
+  try{
+    recordOrderAttempt();
+
+    /* ===== التحقق من السعر الحقيقي من Firestore (منع التلاعب) ===== */
+    const pkgDoc = await getDoc(doc(db,"packages", selectedPkg.id));
+    if(!pkgDoc.exists()){
+      errBox.textContent = 'الباقة غير موجودة، أعد تحميل الصفحة';
+      errBox.style.display='block';
+      return;
+    }
+    const realPrice = parseFloat(pkgDoc.data().price);
+    if(isNaN(realPrice) || realPrice <= 0){
+      errBox.textContent = 'خطأ في سعر الباقة، تواصل مع الدعم';
+      errBox.style.display='block';
+      return;
+    }
+    /* ===== نهاية التحقق من السعر ===== */
+
+    const orderNumber = 'ORD-'+Date.now().toString(36).toUpperCase();
+    const orderData = {
+      userId: currentUser.uid,
+      userName: currentUserData?.name || '',
+      orderNumber,
+      gameId: currentGame.id,
+      gameName: currentGame.name,
+      packageId: selectedPkg.id,
+      packageName: selectedPkg.name,
+      price: realPrice, /* السعر من Firestore وليس من المتصفح */
+      playerId: sanitize(pidRaw),
+      paymentSenderPhone: sanitize(senderPhone),
+      paymentTxId: sanitize(txId),
+      paymentConfirmed: false,
+      status: 'pending',
+      date: new Date().toLocaleDateString('ar-LY'),
+      createdAt: Date.now()
+    };
+    await addDoc(collection(db,"orders"), orderData);
+    logActivity('طلب جديد: '+currentGame.name+' - '+selectedPkg.name, currentUserData?.name);
+
+    document.getElementById('payment-modal').style.display = 'none';
+    document.getElementById('success-detail').innerHTML = `
+      <div class="detail-row"><span class="detail-label">رقم الطلب</span><span class="detail-value">${orderNumber}</span></div>
+      <div class="detail-row"><span class="detail-label">اللعبة</span><span class="detail-value">${sanitize(currentGame.name)}</span></div>
+      <div class="detail-row"><span class="detail-label">الباقة</span><span class="detail-value">${sanitize(selectedPkg.name)}</span></div>
+      <div class="detail-row"><span class="detail-label">معرف اللاعب</span><span class="detail-value">${sanitize(pidRaw)}</span></div>
+      <div class="detail-row"><span class="detail-label">حُوّل من</span><span class="detail-value">${sanitize(senderPhone)}</span></div>
+      <div class="detail-row"><span class="detail-label">السعر</span><span class="detail-value" style="color:var(--primary)">${selectedPkg.price} د.ل</span></div>
+    `;
+    document.getElementById('success-modal').style.display='flex';
+  }catch(e){
+    errBox.textContent = 'حدث خطأ، حاول مرة أخرى';
+    errBox.style.display = 'block';
+  }finally{
+    confirmBtn.disabled = false;
+    confirmBtn.textContent = 'تم التحويل، تأكيد الطلب';
+  }
+}
+
+window.closeSuccess = function(){
+  document.getElementById('success-modal').style.display='none';
+  goPage('home');
+}
+
+function loadOrders(){
+  if(!currentUser) return;
+  if(allOrdersUnsub) allOrdersUnsub();
+  const q = query(collection(db,"orders"), where("userId","==",currentUser.uid));
+  allOrdersUnsub = onSnapshot(q, (snap)=>{
+    const orders = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+    renderOrdersList(orders);
+  });
+}
+
+function renderOrdersList(orders){
+  const el = document.getElementById('orders-content');
+  if(!el) return;
+  if(!orders.length){
+    el.innerHTML='<div class="orders-empty"><p>لا توجد طلبات بعد</p></div>';
+    return;
+  }
+  const statusMap = {pending:'قيد المراجعة',processing:'جاري التنفيذ',completed:'تم الشحن',cancelled:'ملغي'};
+  el.innerHTML='<div class="orders-list">'+orders.map(o=>`
+    <div class="order-item">
+      <div class="order-item-top">
+        <span class="order-num">${sanitize(o.orderNumber)}</span>
+        <span class="order-status status-${o.status}">${statusMap[o.status]||o.status}</span>
+      </div>
+      <div class="order-game">${sanitize(o.gameName)}</div>
+      <div class="order-pkg">${sanitize(o.packageName)} — معرف: ${sanitize(o.playerId)}</div>
+      <div class="order-bottom">
+        <span class="order-price">${o.price} د.ل</span>
+        <span class="order-date">${sanitize(o.date)}</span>
+      </div>
+    </div>
+  `).join('')+'</div>';
+}
+
+function renderAccount(){
+  const el = document.getElementById('account-content');
+  if(!el) return;
+  if(!currentUser || !currentUserData){
+    el.innerHTML=`<div style="text-align:center;padding:60px 16px">
+      <p style="color:var(--muted);margin-bottom:20px">سجل دخولك للوصول لحسابك</p>
+      <button class="submit-btn" onclick="openAuth()" style="max-width:200px;margin:0 auto">تسجيل الدخول</button>
+    </div>`;
+    return;
+  }
+  el.innerHTML=`
+    <div class="account-card">
+      <div class="account-avatar">
+        <svg width="28" height="28" fill="none" stroke="var(--primary)" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div class="account-name">${sanitize(currentUserData.name)}</div>
+      <div class="account-phone">${sanitize(currentUser.email||'')}</div>
+    </div>
+    <div style="margin:16px;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
+      <div class="account-row">
+        <span class="account-row-label">البريد</span>
+        <span class="account-row-value">${sanitize(currentUser.email||'')}</span>
+      </div>
+      <div class="account-row">
+        <span class="account-row-label">الصلاحية</span>
+        <span class="account-row-value">${currentUserData.role==='admin'?'مدير':'مستخدم'}</span>
+      </div>
+    </div>
+    ${currentUserData.role==='admin' ? '<button class="submit-btn" onclick="openAdmin()" style="max-width:calc(100% - 32px);margin:8px 16px;background:rgba(59,130,246,0.1);color:var(--primary);border:1px solid rgba(59,130,246,0.3)">لوحة الإدارة</button>' : ''}
+    <button class="logout-btn" onclick="doLogout()">تسجيل الخروج</button>
+  `;
+}
+
+window.openAuth = function(){ document.getElementById('auth-modal').style.display='flex'; }
+window.closeAuth = function(){ document.getElementById('auth-modal').style.display='none'; }
+window.closeAuthIfBg = function(e){ if(e.target===document.getElementById('auth-modal')) closeAuth(); }
+
+window.switchTab = function(t){
+  document.getElementById('tab-login').classList.toggle('active',t==='login');
+  document.getElementById('tab-register').classList.toggle('active',t==='register');
+  document.getElementById('login-form').style.display=t==='login'?'':'none';
+  document.getElementById('register-form').style.display=t==='register'?'':'none';
+}
+
+window.doLogin = async function(){
+  const lockSeconds = isLoginLocked();
+  if(lockSeconds > 0){
+    const mins = Math.ceil(lockSeconds/60);
+    showToast(`تم حظر المحاولات مؤقتاً، حاول بعد ${mins} دقيقة`,'error');
+    return;
+  }
+  const phone = document.getElementById('login-phone').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  if(!phone || !pass){ showToast('أدخل جميع البيانات','error'); return; }
+  if(pass.length < 6){ showToast('كلمة المرور قصيرة جداً','error'); return; }
+  try{
+    const email = phone.replace(/\D/g,'') + '@hamadistore.app';
+    await signInWithEmailAndPassword(auth, email, pass);
+    resetLoginAttempts();
+    closeAuth();
+    showToast('تم تسجيل الدخول بنجاح','success');
+  }catch(e){
+    console.error('Login Error:', e);
+    if(typeof debugLogAdd==='function') debugLogAdd('firebase', 'Login: '+e.message, { code: e.code });
+    recordFailedLogin();
+    const remaining = MAX_LOGIN_ATTEMPTS - getLoginAttempts().count;
+    if(remaining > 0 && remaining < MAX_LOGIN_ATTEMPTS){
+      showToast(`بيانات خاطئة — باقي ${remaining} محاولات`,'error');
+    } else {
+      showToast('بيانات الدخول غير صحيحة','error');
+    }
+  }
+}
+
+window.doGoogleLogin = async function(){
+  try{
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    const userDocRef = doc(db,"users",user.uid);
+    const userDoc = await getDoc(userDocRef);
+    if(!userDoc.exists()){
+      const userData = { uid: user.uid, name: sanitize(user.displayName || 'مستخدم جوجل'), phone: '', email: user.email || '', role: 'customer', createdAt: Date.now() };
+      await setDoc(userDocRef, userData);
+      currentUserData = userData;
+    } else {
+      currentUserData = userDoc.data();
+    }
+    closeAuth();
+    showToast('تم تسجيل الدخول بنجاح','success');
+  }catch(e){
+    if(typeof debugLogAdd==='function') debugLogAdd('firebase', 'Google Login: '+e.message, { code: e.code });
+    if(e.code !== 'auth/popup-closed-by-user'){
+      showToast('خطأ: '+(e.code||'')+' - '+(e.message||''),'error');
+      console.error('Google Sign-In Error:', e);
+    }
+  }
+}
+
+window.doRegister = async function(){
+  const name = document.getElementById('reg-name').value.trim();
+  const phone = document.getElementById('reg-phone').value.trim();
+  const pass = document.getElementById('reg-pass').value;
+  if(!name || !phone || !pass){ showToast('أدخل جميع البيانات','error'); return; }
+  if(name.length < 2 || name.length > 50){ showToast('الاسم غير صالح','error'); return; }
+  if(!isValidPhone(phone)){ showToast('رقم الهاتف غير صالح','error'); return; }
+  if(pass.length < 6){ showToast('كلمة المرور قصيرة جداً','error'); return; }
+  // الحد من إنشاء حسابات متكررة من نفس الجهاز خلال وقت قصير (مضاد للبوتات)
+  const lastRegister = parseInt(localStorage.getItem('hamadi_last_register')||'0');
+  if(Date.now() - lastRegister < 30000){
+    showToast('الرجاء الانتظار قليلاً قبل إنشاء حساب آخر','error');
+    return;
+  }
+  try{
+    const email = phone.replace(/\D/g,'') + '@hamadistore.app';
+    const cred = await createUserWithEmailAndPassword(auth, email, pass);
+    const userData = { uid:cred.user.uid, name:sanitize(name), phone:sanitize(phone), email, role:'customer', createdAt:Date.now() };
+    await setDoc(doc(db,"users",cred.user.uid), userData);
+    currentUserData = userData;
+    localStorage.setItem('hamadi_last_register', String(Date.now()));
+    closeAuth();
+    showToast('تم إنشاء الحساب بنجاح','success');
+  }catch(e){
+    if(typeof debugLogAdd==='function') debugLogAdd('firebase', 'Register: '+e.message, { code: e.code });
+    if(e.code==='auth/email-already-in-use'){ showToast('هذا الرقم مسجل مسبقاً','error'); }
+    else{
+      showToast('خطأ: '+(e.code||'')+' - '+(e.message||''),'error');
+      console.error('Register Error:', e);
+    }
+  }
+}
+
+window.doLogout = async function(){
+  await signOut(auth);
+  showToast('تم تسجيل الخروج','success');
+  goPage('home');
+}
+
+window.goPage = function(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.querySelectorAll('.nav-dot').forEach(d=>d.style.display='none');
+  const nav=document.getElementById('nav-'+page);
+  if(nav){ nav.classList.add('active'); document.getElementById('dot-'+page).style.display=''; }
+  if(page==='orders') loadOrders();
+  if(page==='account') renderAccount();
+  window.scrollTo(0,0);
+}
+
+function showToast(msg,type=''){
+  const t=document.createElement('div');
+  t.className='toast '+(type||'');
+  t.textContent=msg;
+  document.body.appendChild(t);
+  setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},2500);
+}
+
+let currentAdminSection = 'dashboard';
+let activeSessions = [];
+
+function requireAdmin(){
+  if(!currentUser || !currentUserData || currentUserData.role !== 'admin'){
+    showToast('هذه الصفحة للمدراء فقط','error');
+    return false;
+  }
+  return true;
+}
+
+window.openAdmin = function(){
+  if(!requireAdmin()) return;
+  document.getElementById('admin-overlay').classList.add('open');
+  registerAdminSession();
+  goAdminSection('dashboard');
+}
+
+window.closeAdmin = function(){
+  document.getElementById('admin-overlay').classList.remove('open');
+}
+
+window.adminLogout = async function(){
+  await endAdminSession();
+  await signOut(auth);
+  closeAdmin();
+  showToast('تم تسجيل الخروج','success');
+}
+
+const adminSectionTitles = {
+  dashboard:'لوحة المعلومات', orders:'الطلبات', games:'الألعاب والباقات',
+  users:'المستخدمون', banners:'البانرات', settings:'الإعدادات',
+  contact:'التواصل', security:'الأمان والجلسات'
+};
+
+window.goAdminSection = function(sec){
+  if(!requireAdmin()) return;
+  currentAdminSection = sec;
+  document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('asec-'+sec).classList.add('active');
+  document.querySelectorAll('.admin-bottom-btn').forEach(b=>b.classList.remove('active'));
+  const btn = document.getElementById('abn-'+sec);
+  if(btn) btn.classList.add('active');
+  document.getElementById('admin-page-title').textContent = adminSectionTitles[sec]||sec;
+
+  if(sec==='dashboard') loadAdminDashboard();
+  else if(sec==='orders') loadAdminOrders();
+  else if(sec==='games') loadAdminGames();
+  else if(sec==='users') loadAdminUsers();
+  else if(sec==='banners') loadAdminBanners();
+  else if(sec==='settings') loadAdminSettingsForm();
+  else if(sec==='contact') loadAdminContacts();
+  else if(sec==='security') loadAdminSecurity();
+}
+
+/* ===== DASHBOARD ===== */
+async function loadAdminDashboard(){
+  if(!requireAdmin()) return;
+  const ordersSnap = await getDocs(collection(db,"orders"));
+  const usersSnap = await getDocs(collection(db,"users"));
+  const orders = ordersSnap.docs.map(d=>({id:d.id,...d.data()}));
+
+  document.getElementById('st-orders').textContent = orders.length;
+  document.getElementById('st-pending').textContent = orders.filter(o=>o.status==='pending').length;
+  document.getElementById('st-users').textContent = usersSnap.size;
+  const rev = orders.filter(o=>o.status==='completed').reduce((s,o)=>s+(o.price||0),0);
+  document.getElementById('st-revenue').textContent = rev.toFixed(2);
+
+  const recent = orders.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,8);
+  const SL={pending:'قيد المراجعة',processing:'جاري التنفيذ',completed:'تم الشحن',cancelled:'ملغي'};
+  const SC={pending:'badge-pending',processing:'badge-processing',completed:'badge-completed',cancelled:'badge-cancelled'};
+  document.getElementById('dash-recent-orders').innerHTML = recent.length ? recent.map(o=>`
+    <div class="admin-row">
+      <div class="admin-row-info">
+        <div class="admin-row-title">${sanitize(o.gameName)} — ${sanitize(o.packageName)}</div>
+        <div class="admin-row-sub">ID: ${sanitize(o.playerId)} • ${sanitize(o.orderNumber)}</div>
+      </div>
+      <div style="text-align:left">
+        <div style="color:var(--primary);font-weight:700;font-size:13px">${o.price} د.ل</div>
+        <span class="badge ${SC[o.status]||''}">${SL[o.status]||o.status}</span>
+      </div>
+    </div>
+  `).join('') : '<div style="color:var(--muted);font-size:12px;text-align:center;padding:20px">لا توجد طلبات</div>';
+}
+
+/* ===== ORDERS ===== */
+async function loadAdminOrders(){
+  if(!requireAdmin()) return;
+  const snap = await getDocs(collection(db,"orders"));
+  window._adminOrdersCache = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+  renderAdminOrdersList();
+}
+
+function renderAdminOrdersList(){
+  const search = document.getElementById('orders-search')?.value || '';
+  const SL={pending:'قيد المراجعة',processing:'جاري التنفيذ',completed:'تم الشحن',cancelled:'ملغي'};
+  const SC={pending:'badge-pending',processing:'badge-processing',completed:'badge-completed',cancelled:'badge-cancelled'};
+  const filtered = (window._adminOrdersCache||[]).filter(o=>{
+    const matchFilter = orderFilter==='all' || o.status===orderFilter;
+    const matchSearch = !search || o.orderNumber?.includes(search) || o.gameName?.includes(search) || o.playerId?.includes(search);
+    return matchFilter && matchSearch;
+  });
+  document.getElementById('admin-orders-list').innerHTML = filtered.length ? filtered.map(o=>`
+    <div class="admin-card" style="margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+        <div>
+          <div style="font-size:11px;color:var(--muted)">${sanitize(o.orderNumber)}</div>
+          <div class="admin-row-title">${sanitize(o.gameName)}</div>
+          <div class="admin-row-sub">${sanitize(o.packageName)} • ID: ${sanitize(o.playerId)}</div>
+          <div class="admin-row-sub">${sanitize(o.date||'')}</div>
+        </div>
+        <div style="text-align:left">
+          <div style="color:var(--primary);font-weight:800">${o.price} د.ل</div>
+          <span class="badge ${SC[o.status]||''}">${SL[o.status]||o.status}</span>
+        </div>
+      </div>
+      ${o.paymentSenderPhone ? `
+      <div style="background:var(--muted-bg);border-radius:10px;padding:10px;margin-bottom:10px;font-size:12px">
+        <div style="display:flex;justify-content:space-between;padding:2px 0">
+          <span style="color:var(--muted)">حُوّل من</span>
+          <span style="font-weight:700;direction:ltr">${sanitize(o.paymentSenderPhone)}</span>
+        </div>
+        ${o.paymentTxId ? `<div style="display:flex;justify-content:space-between;padding:2px 0">
+          <span style="color:var(--muted)">رقم العملية</span>
+          <span style="font-weight:700">${sanitize(o.paymentTxId)}</span>
+        </div>` : ''}
+      </div>` : ''}
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="font-size:12px;color:var(--muted)">تغيير الحالة:</span>
+        <select class="admin-select" onchange="updateOrderStatus('${o.id}',this.value)">
+          <option value="pending" ${o.status==='pending'?'selected':''}>قيد المراجعة</option>
+          <option value="processing" ${o.status==='processing'?'selected':''}>جاري التنفيذ</option>
+          <option value="completed" ${o.status==='completed'?'selected':''}>تم الشحن</option>
+          <option value="cancelled" ${o.status==='cancelled'?'selected':''}>ملغي</option>
+        </select>
+      </div>
+    </div>
+  `).join('') : '<div style="color:var(--muted);text-align:center;padding:40px;font-size:13px">لا توجد طلبات</div>';
+}
+
+window.updateOrderStatus = async function(id, status){
+  if(!requireAdmin()) return;
+  await updateDoc(doc(db,"orders",id), { status });
+  logActivity('تحديث حالة طلب إلى: '+status, currentUserData?.name);
+  await loadAdminOrders();
+  showToast('تم تحديث حالة الطلب','success');
+}
+
+window.setOrderFilter = function(f){ orderFilter=f; renderAdminOrdersList(); }
+window.filterAdminOrders = function(){ renderAdminOrdersList(); }
+
+/* ===== GAMES ===== */
+async function loadAdminGames(){
+  if(!requireAdmin()) return;
+  const gamesSnap = await getDocs(collection(db,"games"));
+  const games = gamesSnap.docs.map(d=>({id:d.id,...d.data()}));
+  for(const g of games){
+    const pkgSnap = await getDocs(query(collection(db,"packages"), where("gameId","==",g.id)));
+    g.packages = pkgSnap.docs.map(d=>({id:d.id,...d.data()}));
+  }
+  window._adminGamesCache = games;
+  renderAdminGamesList();
+}
+
+function renderAdminGamesList(){
+  const games = window._adminGamesCache || [];
+  document.getElementById('admin-games-list').innerHTML = games.map(g=>`
+    <div class="admin-card">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+        <img src="${sanitize(g.image||'')}" style="width:48px;height:48px;border-radius:10px;object-fit:cover;background:var(--muted-bg)" onerror="this.style.display='none'"/>
+        <div style="flex:1">
+          <div class="admin-row-title">${sanitize(g.name)}</div>
+          <div class="admin-row-sub">${g.packages.length} باقة</div>
+        </div>
+        <button class="admin-btn admin-btn-danger admin-btn-sm" onclick="deleteAdminGame('${g.id}')">حذف</button>
+      </div>
+      <div style="margin-bottom:10px">
+        <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px">رابط API (للربط مع خدمة خارجية)</label>
+        <div style="display:flex;gap:6px">
+          <input id="api-url-${g.id}" class="admin-input" placeholder="https://example.com/api?key=..." value="${sanitize(g.apiUrl||'')}" style="flex:1;margin:0;font-size:11px;direction:ltr;text-align:left"/>
+          <button class="admin-btn admin-btn-primary admin-btn-sm" onclick="updateGameApiUrl('${g.id}')" style="margin-top:0">حفظ</button>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:6px">الباقات:</div>
+      <div>
+        ${g.packages.map(p=>`
+          <div class="pkg-list-item">
+            <span style="font-size:12px">${sanitize(p.name)} — ${p.price} د.ل</span>
+            <button onclick="deleteAdminPkg('${p.id}','${g.id}')" style="background:none;border:none;color:#ef4444;cursor:pointer;font-size:16px">✕</button>
+          </div>
+        `).join('')}
+        <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">
+          <input id="np-name-${g.id}" class="admin-input" placeholder="اسم الباقة" style="flex:2;min-width:100px;margin:0"/>
+          <input id="np-price-${g.id}" class="admin-input" placeholder="السعر" type="number" style="flex:1;min-width:70px;margin:0"/>
+          <button class="admin-btn admin-btn-primary admin-btn-sm" onclick="addAdminPkg('${g.id}')" style="margin-top:0">+</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+window.updateGameApiUrl = async function(gameId){
+  if(!requireAdmin()) return;
+  const input = document.getElementById('api-url-'+gameId);
+  const apiUrl = input.value.trim();
+  try{
+    await updateDoc(doc(db,"games",gameId), { apiUrl: sanitize(apiUrl) });
+    const g = (window._adminGamesCache||[]).find(x=>x.id===gameId);
+    if(g) g.apiUrl = apiUrl;
+    showToast('تم حفظ رابط API','success');
+  }catch(e){
+    showToast('تعذر حفظ الرابط','error');
+  }
+}
+
+window.addAdminGame = async function(){
+  if(!requireAdmin()) return;
+  const name = document.getElementById('ng-name').value.trim();
+  const image = document.getElementById('ng-image').value.trim();
+  const apiUrl = document.getElementById('ng-apiUrl').value.trim();
+  if(!name){ showToast('أدخل اسم اللعبة','error'); return; }
+  await addDoc(collection(db,"games"), { name:sanitize(name), image:sanitize(image), apiUrl:sanitize(apiUrl), createdAt:Date.now() });
+  document.getElementById('ng-name').value='';
+  document.getElementById('ng-image').value='';
+  document.getElementById('ng-apiUrl').value='';
+  logActivity('إضافة لعبة: '+name, currentUserData?.name);
+  await loadAdminGames();
+  showToast('تمت إضافة اللعبة','success');
+}
+
+window.deleteAdminGame = async function(id){
+  if(!requireAdmin()) return;
+  if(!confirm('حذف اللعبة؟')) return;
+  await deleteDoc(doc(db,"games",id));
+  await loadAdminGames();
+  showToast('تم حذف اللعبة','success');
+}
+
+window.addAdminPkg = async function(gid){
+  if(!requireAdmin()) return;
+  const name = document.getElementById('np-name-'+gid)?.value.trim();
+  const price = document.getElementById('np-price-'+gid)?.value;
+  if(!name || !isValidPrice(price)){ showToast('أدخل اسم الباقة وسعر صحيح','error'); return; }
+  await addDoc(collection(db,"packages"), { gameId:gid, name:sanitize(name), price:parseFloat(price), popular:false, createdAt:Date.now() });
+  await loadAdminGames();
+  showToast('تمت إضافة الباقة','success');
+}
+
+window.deleteAdminPkg = async function(pid, gid){
+  if(!requireAdmin()) return;
+  await deleteDoc(doc(db,"packages",pid));
+  await loadAdminGames();
+}
+
+/* ===== USERS ===== */
+async function loadAdminUsers(){
+  if(!requireAdmin()) return;
+  const snap = await getDocs(collection(db,"users"));
+  window._adminUsersCache = snap.docs.map(d=>({id:d.id,...d.data()}));
+  renderAdminUsersList();
+}
+
+function renderAdminUsersList(){
+  const search = document.getElementById('users-search')?.value || '';
+  const users = (window._adminUsersCache||[]).filter(u=>!search || u.name?.includes(search) || u.phone?.includes(search));
+  document.getElementById('admin-users-list').innerHTML = users.length ? users.map(u=>`
+    <div class="admin-card" style="margin-bottom:8px;display:flex;align-items:center;gap:10px">
+      <div style="width:40px;height:40px;border-radius:50%;background:rgba(59,130,246,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <svg width="18" height="18" fill="none" stroke="var(--primary)" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div style="flex:1">
+        <div class="admin-row-title">${sanitize(u.name)} ${u.role==='admin'?'<span style="color:var(--primary);font-size:10px">(مدير)</span>':''}</div>
+        <div class="admin-row-sub">${sanitize(u.phone||u.email||'')}</div>
+      </div>
+    </div>
+  `).join('') : '<div style="color:var(--muted);text-align:center;padding:40px;font-size:13px">لا يوجد مستخدمون</div>';
+}
+window.filterAdminUsers = function(){ renderAdminUsersList(); }
+
+/* ===== BANNERS ===== */
+async function loadAdminBanners(){
+  if(!requireAdmin()) return;
+  const snap = await getDocs(collection(db,"banners"));
+  window._adminBannersCache = snap.docs.map(d=>({id:d.id,...d.data()}));
+  renderAdminBannersList();
+}
+
+function renderAdminBannersList(){
+  const banners = window._adminBannersCache || [];
+  document.getElementById('admin-banners-list').innerHTML = banners.length ? banners.map(b=>`
+    <div class="admin-card" style="margin-bottom:8px;display:flex;align-items:center;gap:10px">
+      <img src="${sanitize(b.image)}" style="width:64px;height:40px;object-fit:cover;border-radius:8px;background:var(--muted-bg)" onerror="this.style.display='none'"/>
+      <div style="flex:1">
+        <div class="admin-row-title">${sanitize(b.title)}</div>
+      </div>
+      <button onclick="deleteAdminBanner('${b.id}')" class="admin-btn admin-btn-danger admin-btn-sm">حذف</button>
+    </div>
+  `).join('') : '<div style="color:var(--muted);text-align:center;padding:40px;font-size:13px">لا توجد بانرات</div>';
+}
+
+window.addAdminBanner = async function(){
+  if(!requireAdmin()) return;
+  const title = document.getElementById('nb-title').value.trim();
+  const image = document.getElementById('nb-image').value.trim();
+  const link = document.getElementById('nb-link').value.trim();
+  if(!title || !image){ showToast('أدخل العنوان والصورة','error'); return; }
+  await addDoc(collection(db,"banners"), { title:sanitize(title), image:sanitize(image), link:sanitize(link)||null, createdAt:Date.now() });
+  document.getElementById('nb-title').value='';
+  document.getElementById('nb-image').value='';
+  document.getElementById('nb-link').value='';
+  await loadAdminBanners();
+  showToast('تمت إضافة البانر','success');
+}
+
+window.deleteAdminBanner = async function(id){
+  if(!requireAdmin()) return;
+  if(!confirm('حذف البانر؟')) return;
+  await deleteDoc(doc(db,"banners",id));
+  await loadAdminBanners();
+}
+
+/* ===== SETTINGS ===== */
+window.saveAdminSettings = async function(){
+  if(!requireAdmin()) return;
+  const settings = {
+    storeName: sanitize(document.getElementById('set-storeName').value),
+    heroTitle: sanitize(document.getElementById('set-heroTitle').value),
+    currency: sanitize(document.getElementById('set-currency').value),
+    whatsapp: document.getElementById('set-whatsapp').value.replace(/\D/g,''),
+    paymentPhone: document.getElementById('set-paymentPhone').value.replace(/\D/g,'')
+  };
+  await setDoc(doc(db,"settings","store"), settings);
+  storeSettings = { ...storeSettings, ...settings };
+  document.getElementById('settings-msg').style.display='block';
+  setTimeout(()=>document.getElementById('settings-msg').style.display='none',2500);
+  document.querySelector('.header-title h1').textContent = settings.storeName;
+  document.querySelectorAll('.wa-btn').forEach(el=>el.href='https://wa.me/'+settings.whatsapp);
+}
+
+async function loadAdminSettingsForm(){
+  try{
+    const settingsDoc = await getDoc(doc(db,"settings","store"));
+    if(settingsDoc.exists()){
+      const s = settingsDoc.data();
+      if(s.storeName) document.getElementById('set-storeName').value = s.storeName;
+      if(s.heroTitle) document.getElementById('set-heroTitle').value = s.heroTitle;
+      if(s.currency) document.getElementById('set-currency').value = s.currency;
+      if(s.whatsapp) document.getElementById('set-whatsapp').value = s.whatsapp;
+      if(s.paymentPhone) document.getElementById('set-paymentPhone').value = s.paymentPhone;
+    }
+  }catch(e){}
+}
+
+/* ===== CONTACT ===== */
+async function loadAdminContacts(){
+  if(!requireAdmin()) return;
+  const snap = await getDocs(collection(db,"contacts"));
+  window._adminContactsCache = snap.docs.map(d=>({id:d.id,...d.data()}));
+  renderAdminContactsList();
+}
+
+function renderAdminContactsList(){
+  const contacts = window._adminContactsCache || [];
+  document.getElementById('admin-contacts-list').innerHTML = contacts.length ? contacts.map(c=>`
+    <div class="admin-card" style="margin-bottom:8px;display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <div class="admin-row-title">${sanitize(c.phone)}</div>
+        <div class="admin-row-sub">${sanitize(c.label)}</div>
+      </div>
+      <button onclick="deleteAdminContact('${c.id}')" class="admin-btn admin-btn-danger admin-btn-sm">حذف</button>
+    </div>
+  `).join('') : '<div style="color:var(--muted);text-align:center;padding:40px;font-size:13px">لا توجد أرقام</div>';
+}
+
+window.addAdminContact = async function(){
+  if(!requireAdmin()) return;
+  const phone = document.getElementById('nc-phone').value.trim();
+  const label = document.getElementById('nc-label').value.trim();
+  if(!phone){ showToast('أدخل رقم الهاتف','error'); return; }
+  await addDoc(collection(db,"contacts"), { phone:sanitize(phone), label:sanitize(label)||'واتساب', createdAt:Date.now() });
+  document.getElementById('nc-phone').value='';
+  document.getElementById('nc-label').value='';
+  await loadAdminContacts();
+}
+
+window.deleteAdminContact = async function(id){
+  if(!requireAdmin()) return;
+  await deleteDoc(doc(db,"contacts",id));
+  await loadAdminContacts();
+}
+
+/* ===== SECURITY: LOGS + BLOCKED IPs + ACTIVE SESSIONS ===== */
+async function logActivity(action, user=''){
+  try{
+    await addDoc(collection(db,"logs"), { action, user:user||'', date:new Date().toLocaleString('ar-LY'), createdAt:Date.now() });
+  }catch(e){ /* silent */ }
+}
+
+async function loadAdminSecurity(){
+  if(!requireAdmin()) return;
+  setSecTab('sessions');
+}
+
+window.setSecTab = async function(tab){
+  document.getElementById('sec-logs-section').style.display = tab==='logs' ? '' : 'none';
+  document.getElementById('sec-ips-section').style.display = tab==='ips' ? '' : 'none';
+  let sessSection = document.getElementById('sec-sessions-section');
+  if(!sessSection){
+    sessSection = document.createElement('div');
+    sessSection.id = 'sec-sessions-section';
+    document.getElementById('asec-security').querySelector('.admin-main, #sec-logs-section').parentNode.insertBefore(sessSection, document.getElementById('sec-logs-section'));
+  }
+
+  // tabs styling
+  ['logs','ips','sessions'].forEach(t=>{
+    const tabBtn = document.getElementById('sec-tab-'+t);
+    if(tabBtn){
+      tabBtn.style.color = (t===tab) ? 'var(--primary)' : 'var(--muted)';
+      tabBtn.style.borderBottom = (t===tab) ? '2px solid var(--primary)' : 'none';
+    }
+  });
+
+  if(tab==='logs'){
+    const snap = await getDocs(query(collection(db,"logs")));
+    const logs = snap.docs.map(d=>d.data()).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,50);
+    document.getElementById('admin-logs-list').innerHTML = logs.length ? logs.map(l=>`
+      <div class="admin-card" style="margin-bottom:6px">
+        <div class="admin-row-title">${sanitize(l.action)}</div>
+        <div class="admin-row-sub">${l.user?'بواسطة: '+sanitize(l.user):''}</div>
+        <div class="admin-row-sub">${sanitize(l.date||'')}</div>
+      </div>
+    `).join('') : '<div style="color:var(--muted);text-align:center;padding:40px;font-size:13px">لا يوجد سجل نشاط</div>';
+  }
+  if(tab==='ips'){
+    const snap = await getDocs(collection(db,"blockedIps"));
+    const ips = snap.docs.map(d=>({id:d.id,...d.data()}));
+    document.getElementById('admin-ips-list').innerHTML = ips.length ? ips.map(i=>`
+      <div class="admin-card" style="margin-bottom:6px;display:flex;justify-content:space-between;align-items:center">
+        <span style="font-family:monospace;font-size:13px">${sanitize(i.ip)}</span>
+        <button onclick="unblockIp('${i.id}')" class="admin-btn admin-btn-danger admin-btn-sm">إلغاء الحظر</button>
+      </div>
+    `).join('') : '<div style="color:var(--muted);text-align:center;padding:40px;font-size:13px">لا توجد IPs محظورة</div>';
+  }
+}
+
+window.blockIp = async function(){
+  if(!requireAdmin()) return;
+  const ip = document.getElementById('new-ip').value.trim();
+  if(!ip) return;
+  await addDoc(collection(db,"blockedIps"), { ip, date:new Date().toLocaleDateString('ar-LY') });
+  document.getElementById('new-ip').value='';
+  setSecTab('ips');
+}
+
+window.unblockIp = async function(id){
+  if(!requireAdmin()) return;
+  await deleteDoc(doc(db,"blockedIps",id));
+  setSecTab('ips');
+}
+
+/* ===== ACTIVE SESSIONS (عدد الجلسات الموجودة) ===== */
+let sessionId = null;
+let sessionHeartbeat = null;
+
+async function registerAdminSession(){
+  if(!currentUser) return;
+  sessionId = currentUser.uid + '_' + Date.now();
+  await setDoc(doc(db,"sessions",sessionId), {
+    userId: currentUser.uid,
+    userName: currentUserData?.name || '',
+    startedAt: Date.now(),
+    lastActive: Date.now()
+  });
+  sessionHeartbeat = setInterval(async ()=>{
+    if(sessionId) await updateDoc(doc(db,"sessions",sessionId), { lastActive: Date.now() });
+  }, 30000);
+  renderActiveSessionsCount();
+}
+
+async function endAdminSession(){
+  if(sessionHeartbeat) clearInterval(sessionHeartbeat);
+  if(sessionId){
+    try{ await deleteDoc(doc(db,"sessions",sessionId)); }catch(e){}
+  }
+}
+
+async function renderActiveSessionsCount(){
+  const snap = await getDocs(collection(db,"sessions"));
+  const now = Date.now();
+  const active = snap.docs.map(d=>d.data()).filter(s=>(now - (s.lastActive||0)) < 120000); // active within last 2 min
+  let countEl = document.getElementById('active-sessions-count');
+  if(!countEl){
+    const statGrid = document.getElementById('dash-stats');
+    const card = document.createElement('div');
+    card.className = 'stat-card';
+    card.innerHTML = `<div class="stat-value" style="color:#22c55e" id="active-sessions-count">0</div><div class="stat-label">الجلسات النشطة الآن</div>`;
+    statGrid.appendChild(card);
+    countEl = document.getElementById('active-sessions-count');
+  }
+  countEl.textContent = active.length;
+}
+
+window.addEventListener('beforeunload', ()=>{ endAdminSession(); });
+
+</script>
+</body>
+</html>
